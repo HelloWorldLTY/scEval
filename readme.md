@@ -9,7 +9,9 @@ To install our benchmarking environment, please use conda to create a environmen
 conda env create -n scgpt --file scgpt.yml
 ```
 
-For other methods we used including [Geneformer](https://huggingface.co/ctheodoris/Geneformer), [scBERT](https://github.com/TencentAILabHealthcare/scBERT), [ResPAN](https://github.com/AprilYuge/ResPAN/tree/main) and [scDesign3](https://github.com/SONGDONGYUAN1994/scDesign3), please refer their original project website for instruction. We recommend creating different environment for different methods.
+For other methods we used, please refer their original project website for instruction. We recommend creating different environment for different methods.
+
+These methods include: [Geneformer](https://huggingface.co/ctheodoris/Geneformer), [scBERT](https://github.com/TencentAILabHealthcare/scBERT), [cellLM](https://github.com/BioFM/OpenBioMed/tree/main),  [ResPAN](https://github.com/AprilYuge/ResPAN/tree/main), [scDesign3](https://github.com/SONGDONGYUAN1994/scDesign3), [scVI](https://scvi-tools.org/), [Tangram](https://github.com/broadinstitute/Tangram).
 
 # Pre-training weights
 
