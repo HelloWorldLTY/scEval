@@ -26,7 +26,18 @@ Pre-training weights of scBERT can be found in [scBERT](https://github.com/Tence
 
 # Benchmarking information
 
-Please refer different folders for the codes of scEval and metrics we used to evaluate single-cell LLMs under different tasks. 
+Please refer different folders for the codes of scEval and metrics we used to evaluate single-cell LLMs under different tasks. In general, we list the tasks and corresponding metrics here:
+
+| Tasks                                                 | Metrics                                  |
+|-------------------------------------------------------|------------------------------------------|
+| Batch Effect Correction, Multi-omics Data Integration |
+| and Simulation                                        | [scIB](https://github.com/theislab/scib)                                     |
+| Cell-type Annotation and Gene Function Prediction     | Accuracy, Precision, Recall and F1 score |
+| Imputation                                            | [scIB](https://github.com/theislab/scib), Correlation                        |
+| Perturbation Prediction                               | Correlation                              |
+| Gene Network Analysis                                 | Jaccard similarity                       |
+
+
 
 # Contact
 
