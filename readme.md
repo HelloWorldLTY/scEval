@@ -11,7 +11,7 @@ conda env create -n scgpt --file scgpt_bench.yml
 
 For other methods we used, please refer their original project website for instruction. We recommend creating different environment for different methods.
 
-These methods include: [Geneformer](https://huggingface.co/ctheodoris/Geneformer), [scBERT](https://github.com/TencentAILabHealthcare/scBERT), [CellLM](https://github.com/BioFM/OpenBioMed/tree/main), [TOSICA](https://github.com/JackieHanLab/TOSICA/tree/main), [ResPAN](https://github.com/AprilYuge/ResPAN/tree/main), [scDesign3](https://github.com/SONGDONGYUAN1994/scDesign3), [scVI](https://scvi-tools.org/), [Tangram](https://github.com/broadinstitute/Tangram).
+These methods include: [tGPT](https://github.com/deeplearningplus/tGPT), [Geneformer](https://huggingface.co/ctheodoris/Geneformer), [scBERT](https://github.com/TencentAILabHealthcare/scBERT), [CellLM](https://github.com/BioFM/OpenBioMed/tree/main), [TOSICA](https://github.com/JackieHanLab/TOSICA/tree/main), [ResPAN](https://github.com/AprilYuge/ResPAN/tree/main), [scDesign3](https://github.com/SONGDONGYUAN1994/scDesign3), [scVI](https://scvi-tools.org/), [Tangram](https://github.com/broadinstitute/Tangram).
 
 We need scIB for evaluation. Please use pip to install it:
 ```
