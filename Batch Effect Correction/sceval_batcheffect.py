@@ -65,7 +65,7 @@ def parse_args():
                         help='n_bins')  
     
     parser.add_argument('--GEPC', type=bool, default=True,
-                        help='n_bins')   
+                        help='GEPC Loss')   
 
     parser.add_argument('--ecs_thres', type=float, default=0.8,
                         help='beta in the ecs loss')
@@ -272,7 +272,7 @@ if __name__ == "__main__":
         train_batch_labels,
         valid_batch_labels,
     ) = train_test_split(
-        all_counts, celltypes_labels, batch_ids, test_size=0.01, shuffle=True
+        all_counts, celltypes_labels, batch_ids, test_size=0.1, shuffle=True
     )
 
     if config.load_model is None:
