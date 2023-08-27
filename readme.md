@@ -11,7 +11,7 @@ conda env create -n scgpt --file scgpt_bench.yml
 
 For other methods we used, please refer their original project website for instruction. We recommend creating different environment for different methods.
 
-These methods include: [Geneformer](https://huggingface.co/ctheodoris/Geneformer), [scBERT](https://github.com/TencentAILabHealthcare/scBERT), [CellLM](https://github.com/BioFM/OpenBioMed/tree/main), [TOSICA](https://github.com/JackieHanLab/TOSICA/tree/main), [ResPAN](https://github.com/AprilYuge/ResPAN/tree/main), [scDesign3](https://github.com/SONGDONGYUAN1994/scDesign3), [scVI](https://scvi-tools.org/), [Tangram](https://github.com/broadinstitute/Tangram).
+These methods include: [tGPT](https://github.com/deeplearningplus/tGPT), [Geneformer](https://huggingface.co/ctheodoris/Geneformer), [scBERT](https://github.com/TencentAILabHealthcare/scBERT), [CellLM](https://github.com/BioFM/OpenBioMed/tree/main), [TOSICA](https://github.com/JackieHanLab/TOSICA/tree/main), [ResPAN](https://github.com/AprilYuge/ResPAN/tree/main), [scDesign3](https://github.com/SONGDONGYUAN1994/scDesign3), [scVI](https://scvi-tools.org/), [Tangram](https://github.com/broadinstitute/Tangram).
 
 We need scIB for evaluation. Please use pip to install it:
 ```
@@ -26,7 +26,18 @@ Pre-training weights of scBERT can be found in [scBERT](https://github.com/Tence
 
 # Benchmarking information
 
-Please refer different folders for the codes of scEval and metrics we used to evaluate single-cell LLMs under different tasks. 
+Please refer different folders for the codes of scEval and metrics we used to evaluate single-cell LLMs under different tasks. In general, we list the tasks and corresponding metrics here:
+
+| Tasks                                                 | Metrics                                  |
+|-------------------------------------------------------|------------------------------------------|
+| Batch Effect Correction, Multi-omics Data Integration |
+| and Simulation                                        | [scIB](https://github.com/theislab/scib)                                     |
+| Cell-type Annotation and Gene Function Prediction     | Accuracy, Precision, Recall and F1 score |
+| Imputation                                            | [scIB](https://github.com/theislab/scib), Correlation                        |
+| Perturbation Prediction                               | Correlation                              |
+| Gene Network Analysis                                 | Jaccard similarity                       |
+
+We also have an official website to summarize the main message from our work. Please refer this link for details.
 
 # Results.
 

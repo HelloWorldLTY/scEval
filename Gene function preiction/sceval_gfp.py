@@ -243,8 +243,13 @@ if __name__ == "__main__":
     )
     preprocessor(adata, batch_key="str_batch" if dataset_name != "heart_cell" else None)
 
+<<<<<<< HEAD
     adata_train = adata[:, adata.var['dose_cond'] != -1]
     sc.pp.filter_cells(adata_train, min_counts = 1) # choose to only include labeled genes 
+=======
+    adata_train = adata[:, adata.var['dose_cond'] != -1] 
+    sc.pp.filter_cells(adata_train, min_counts = 1) # filter cells with no labeled gene expressed.
+>>>>>>> d0fd2b05863473659bef2ba904c9346e4e5b4fb1
 
     if per_seq_batch_sample:
         # sort the adata by batch_id in advance
