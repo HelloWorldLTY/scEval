@@ -39,6 +39,10 @@ Please refer different folders for the codes of scEval and metrics we used to ev
 
 We also have an official website to summarize the main message from our work. Please refer this link for details.
 
+# Results.
+
+We have an official website as the summary of our work. Please use this link for access.
+
 # Contact
 
 Please contact tianyu.liu@yale.edu if you have any questions about this project.

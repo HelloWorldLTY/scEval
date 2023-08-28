@@ -65,7 +65,7 @@ def parse_args():
                         help='n_bins')  
     
     parser.add_argument('--GEPC', type=bool, default=True,
-                        help='n_bins')   
+                        help='GEPC Loss')   
 
     parser.add_argument('--ecs_thres', type=float, default=0.8,
                         help='beta in the ecs loss')
