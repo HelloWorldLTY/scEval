@@ -49,32 +49,6 @@ sc.set_figure_params(figsize=(4, 4))
 os.environ["KMP_WARNINGS"] = "off"
 # os.environ["WANDB_MODE"] = "offline"
 
-# hyperparameter_defaults = dict(
-#     seed=42,
-#     dataset_name="PBMC_10K",
-#     do_train=True,
-#     load_model="save/scGPT_bc",
-#     mask_ratio=0.1,
-#     epochs=10,
-#     n_bins=10001,
-#     GEPC=True,  # Masked value prediction for cell embedding
-#     ecs_thres=0.8,  # Elastic cell similarity objective, 0.0 to 1.0, 0.0 to disable
-#     dab_weight=10.0,
-#     lr=1e-4,
-#     batch_size=64,
-#     layer_size=128,
-#     nlayers=4,
-#     nhead=4,
-#     # if load model, batch_size, layer_size, nlayers, nhead will be ignored
-#     dropout=0.2,
-#     schedule_ratio=0.9,  # ratio of epochs for learning rate schedule
-#     save_eval_interval=5,
-#     log_interval=10,
-#     fast_transformer=True,
-#     pre_norm=False,
-#     amp=True,  # Automatic Mixed Precision
-# )
-
 # modify original param
 hyperparameter_defaults = dict(
     seed=42,

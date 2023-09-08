@@ -112,7 +112,6 @@ def generate_target_dataset(adata, batch_list):
 
 set_seed(config.seed)
 
-# %%
 # settings for input and preprocessing
 pad_token = "<pad>"
 special_tokens = [pad_token, "<cls>", "<eoc>"]
@@ -127,7 +126,6 @@ per_seq_batch_sample = False
 DSBN = True  # Domain-spec batchnorm
 explicit_zero_prob = True  # whether explicit bernoulli for zeros
 
-# %%
 dataset_name = config.dataset_name
 save_dir = Path(f"./save/dev_{dataset_name}-{time.strftime('%b%d-%H-%M')}/")
 save_dir.mkdir(parents=True, exist_ok=True)
@@ -156,7 +154,6 @@ order = order_selection(adata)
 adata = generate_target_dataset(adata, order)
 # adata = adata[[True if i in ["Batch3_fluidigmc1", "Batch5_smartseq2"] else False for i in adata.obs.batch]]
 
-# %%
 # make the batch category column
 adata.obs["str_batch"] = adata.obs[ori_batch_col].astype(str)
 batch_id_labels = adata.obs["str_batch"].astype("category").cat.codes.values
@@ -198,7 +195,7 @@ if config.load_model is not None:
     nlayers = model_configs["nlayers"]
     n_layers_cls = model_configs["n_layers_cls"]
 
-# %%
+
 # set up the preprocessor, use the args to config the workflow
 preprocessor = Preprocessor(
     use_key="X",  # the key in adata.layers to use as raw data
@@ -215,15 +212,11 @@ preprocessor = Preprocessor(
 )
 preprocessor(adata, batch_key="batch" if dataset_name != "heart_cell" else None)
 
-# %%
 if per_seq_batch_sample:
     # sort the adata by batch_id in advance
     adata_sorted = adata[adata.obs["batch_id"].argsort()].copy()
 
-# %% [markdown]
-# ## Tokenize input
 
-# %%
 input_layer_key = "X_binned"
 all_counts = (
     adata.layers[input_layer_key].A
@@ -251,7 +244,6 @@ batch_ids = np.array(batch_ids)
     all_counts, celltypes_labels, batch_ids, test_size=0.33, shuffle=True, random_state=42
 )
 
-# %%
 if config.load_model is None:
     vocab = Vocab(
         VocabPybind(genes + special_tokens, None)
@@ -259,7 +251,6 @@ if config.load_model is None:
 vocab.set_default_index(vocab["<pad>"])
 gene_ids = np.array(vocab(genes), dtype=int)
 
-# %%
 tokenized_train = tokenize_and_pad_batch(
     train_data,
     gene_ids,
@@ -290,7 +281,6 @@ logger.info(
 )
 
 
-# %%
 def prepare_data(sort_seq_batch=False) -> Tuple[Dict[str, torch.Tensor]]:
     masked_values_train = random_mask_value(
         tokenized_train["values"],
@@ -412,9 +402,6 @@ def prepare_dataloader(
     )
     return data_loader
 
-# %% [markdown]
-# # Create and finetune scGPT
-# %%
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 ntokens = len(vocab)  # size of vocabulary
@@ -798,7 +785,7 @@ def return_testdata(
         
     return cell_embeddings
 
-### %%time
+
 best_val_loss = float("inf")
 best_avg_bio = 0.0
 best_model = None
@@ -874,7 +861,6 @@ order = order_selection(adata)
 adata = generate_target_dataset(adata, order)
 
 
-# %%
 # make the batch category column
 adata.obs["str_batch"] = adata.obs[ori_batch_col].astype(str)
 batch_id_labels = adata.obs["str_batch"].astype("category").cat.codes.values
@@ -882,7 +868,7 @@ adata.obs["batch_id"] = batch_id_labels
 
 adata.var["gene_name"] = adata.var.index.tolist()
 
-# %%
+
 # set up the preprocessor, use the args to config the workflow
 preprocessor = Preprocessor(
     use_key="X",  # the key in adata.layers to use as raw data
@@ -938,7 +924,7 @@ order = order_selection(adata)
 adata = generate_target_dataset(adata, order)
 # adata = adata[[True if i in ["Batch3_fluidigmc1", "Batch5_smartseq2"] else False for i in adata.obs.batch]]
 
-# %%
+
 # make the batch category column
 adata.obs["str_batch"] = adata.obs[ori_batch_col].astype(str)
 batch_id_labels = adata.obs["str_batch"].astype("category").cat.codes.values
@@ -946,7 +932,7 @@ adata.obs["batch_id"] = batch_id_labels
 
 adata.var["gene_name"] = adata.var.index.tolist()
 
-# %%
+
 # set up the preprocessor, use the args to config the workflow
 preprocessor = Preprocessor(
     use_key="X",  # the key in adata.layers to use as raw data

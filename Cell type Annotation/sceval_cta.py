@@ -837,7 +837,6 @@ if __name__ == "__main__":
             
         return cell_embeddings
 
-    ### %%time
     best_val_loss = float("inf")
     best_avg_bio = 0.0
     best_model = None

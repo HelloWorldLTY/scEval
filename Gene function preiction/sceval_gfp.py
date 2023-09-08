@@ -250,10 +250,9 @@ if __name__ == "__main__":
         # sort the adata by batch_id in advance
         adata_sorted = adata_train[adata_train.obs["batch_id"].argsort()].copy()
 
-    # %% [markdown]
+  
     # ## Tokenize input
 
-    # %%
     input_layer_key = "X_binned"
     all_counts = (
         adata_train.layers[input_layer_key].A
@@ -301,7 +300,6 @@ if __name__ == "__main__":
     tensor_train_gene_labels = torch.from_numpy(train_gene_labels.values).long().cuda()
     tensor_valid_gene_labels = torch.from_numpy(valid_gene_labels.values).long().cuda()
         
-    # %%
     tokenized_train = tokenize_and_pad_batch(
         train_data,
         gene_ids_train,
@@ -332,7 +330,6 @@ if __name__ == "__main__":
     )
 
 
-    # %%
     def prepare_data(sort_seq_batch=False) -> Tuple[Dict[str, torch.Tensor]]:
         masked_values_train = random_mask_value(
             tokenized_train["values"],
@@ -436,9 +433,7 @@ if __name__ == "__main__":
         )
         return data_loader
 
-    # %% [markdown]
     # # Create and finetune scGPT
-    # %%
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     ntokens = len(vocab)  # size of vocabulary
@@ -951,7 +946,7 @@ if __name__ == "__main__":
             
         return cell_embeddings
 
-    ### %%time
+
     best_val_loss = float("inf")
     best_avg_bio = 0.0
     best_model = None

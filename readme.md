@@ -37,12 +37,14 @@ Please refer different folders for the codes of scEval and metrics we used to ev
 | Perturbation Prediction                               | Correlation                              |
 | Gene Network Analysis                                 | Jaccard similarity                       |
 
-We also have an official website to summarize the main message from our work. Please refer this link for details.
+The file 'sceval_lib.py' includes all of the metrics we used in this project.
 
-# Results.
+# Results
 
-We have an official website as the summary of our work. Please use this link for access.
+We have an official website as the summary of our work. Please use this link for access (We will update this link soon, stay tuned!).
 
 # Contact
 
 Please contact tianyu.liu@yale.edu if you have any questions about this project.
+
+# Citation
