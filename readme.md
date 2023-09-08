@@ -48,3 +48,17 @@ We have an official website as the summary of our work. Please use this link for
 Please contact tianyu.liu@yale.edu if you have any questions about this project.
 
 # Citation
+
+```
+@article {Liu2023.09.08.555192,
+	author = {Tianyu Liu and Kexing Li and Yuge Wang and Hongyu Li and Hongyu Zhao},
+	title = {Evaluating the Utilities of Large Language Models in Single-cell Data Analysis},
+	elocation-id = {2023.09.08.555192},
+	year = {2023},
+	doi = {10.1101/2023.09.08.555192},
+	publisher = {Cold Spring Harbor Laboratory},
+	URL = {https://www.biorxiv.org/content/early/2023/09/08/2023.09.08.555192},
+	eprint = {https://www.biorxiv.org/content/early/2023/09/08/2023.09.08.555192.full.pdf},
+	journal = {bioRxiv}
+}
+```

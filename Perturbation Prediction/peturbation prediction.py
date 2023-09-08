@@ -118,7 +118,7 @@ use_dataset = "adamson_perturb"
 
 set_seed(config.seed)
 
-# %%
+
 # settings for input and preprocessing
 pad_token = "<pad>"
 special_tokens = [pad_token, "<cls>", "<eoc>"]
@@ -133,7 +133,7 @@ per_seq_batch_sample = False
 DSBN = True  # Domain-spec batchnorm
 explicit_zero_prob = True  # whether explicit bernoulli for zeros
 
-# %%
+
 dataset_name = config.dataset_name
 save_dir = Path(f"./save/dev_{dataset_name}-{time.strftime('%b%d-%H-%M')}/")
 save_dir.mkdir(parents=True, exist_ok=True)
@@ -145,7 +145,6 @@ logger = scg.logger
 scg.utils.add_file_handler(logger, save_dir / "run.log")
 
 
-# %% [markdown]
 # ## Loading and preparing data
 # if dataset_name == "PBMC_10K":
 #     adata = scvi.data.pbmc_dataset()  # 11990 × 3346
@@ -270,15 +269,14 @@ preprocessor = Preprocessor(
 )
 preprocessor(adata, batch_key="batch" if dataset_name != "heart_cell" else None)
 
-# %%
+
 if per_seq_batch_sample:
     # sort the adata by batch_id in advance
     adata_sorted = adata[adata.obs["batch_id"].argsort()].copy()
 
-# %% [markdown]
 # ## Tokenize input
 
-# %%
+
 
 adata_pert = adata[adata.obs.condition != 'ctrl'] 
 adata_ctrl = adata[adata.obs.condition == 'ctrl']
@@ -342,7 +340,7 @@ if config.load_model is None:
 vocab.set_default_index(vocab["<pad>"])
 gene_ids = np.array(vocab(genes), dtype=int)
 
-# %%
+
 tokenized_train_input = tokenize_and_pad_batch(
     train_data_input,
     gene_ids,
@@ -402,7 +400,7 @@ logger.info(
 
 train_mask , valid_mask = generate_perturb_train(input_train_obs_names, input_valid_obs_names, tokenized_train_input["values"], tokenized_valid_input["values"], adata_ctrl)
 
-# %%
+
 def prepare_data(sort_seq_batch=False) -> Tuple[Dict[str, torch.Tensor]]:
 #     masked_values_train = random_mask_value(
 #         tokenized_train["values"],
@@ -518,10 +516,9 @@ def prepare_dataloader(
     )
     return data_loader
 
-# %% [markdown]
 # # Create and finetune scGPT
 
-# %%
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 ntokens = len(vocab)  # size of vocabulary
