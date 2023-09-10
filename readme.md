@@ -17,6 +17,8 @@ We need scIB for evaluation. Please use pip to install it:
 ```
 pip install scib
 ```
+We also provide a scib version with our new function in this repo.
+
 
 # Pre-training weights
 
@@ -38,6 +40,18 @@ Please refer different folders for the codes of scEval and metrics we used to ev
 | Gene Network Analysis                                 | Jaccard similarity                       |
 
 The file 'sceval_lib.py' includes all of the metrics we used in this project.
+
+To run the codes in different tasks, please use (we choose batch effect correction as an example here):
+
+```
+python sceval_batcheffect.py
+```
+
+To avoid using wandb, please set:
+
+```
+os.environ["WANDB_MODE"] = "offline"
+```
 
 # Results
 

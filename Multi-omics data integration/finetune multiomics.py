@@ -221,7 +221,7 @@ batch_ids = np.array(batch_ids)
     train_batch_labels,
     valid_batch_labels,
 ) = train_test_split(
-    all_counts, celltypes_labels, batch_ids, test_size=0.001, shuffle=True
+    all_counts, celltypes_labels, batch_ids, test_size=0.1, shuffle=True
 )
 
 # %%

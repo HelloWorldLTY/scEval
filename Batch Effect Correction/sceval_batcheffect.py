@@ -123,7 +123,7 @@ if __name__ == "__main__":
         seed=args.seed,
         dataset_name="PBMC_10K",
         do_train=True,
-        load_model="save/scGPT_bc",
+        load_model="save/scGPT_bc", # replace this part with "scGPT_full" to try the performance of scGPT v2.
         mask_ratio=args.mask_ratio,
         epochs=args.epoches,
         n_bins=args.n_bins,
