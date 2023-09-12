@@ -1,4 +1,4 @@
-# scEval: A evaluation platform for single-cell LLMs
+# scEval😈: A evaluation platform for single-cell LLMs
 
 This is the repo for our benchmarking and analysis project. 
 
