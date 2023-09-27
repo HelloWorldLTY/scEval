@@ -24,7 +24,9 @@ We also provide a scib version with our new function in this repo.
 
 Most of our experiments were finished based on weights under [scGPT_bc](https://drive.google.com/drive/folders/1S9B2QUvBAh_FxUNrWrLfsvsds1thF9ad?usp=share_link). [scGPT_full](https://drive.google.com/drive/folders/1eNdHu45uXDHOF4u0J1sYiBLZYN55yytS?usp=share_link) from scGPT v2 was also used in the batch effect correction evaluation.
 
-Pre-training weights of scBERT can be found in [scBERT](https://github.com/TencentAILabHealthcare/scBERT). Pre-training weights of CellLM can be found in [cellLM](https://github.com/BioFM/OpenBioMed/tree/main). Pre-training weights of Geneformer can be found in [Geneformer](https://huggingface.co/ctheodoris/Geneformer).
+Pre-training weights of scBERT can be found in [scBERT](https://github.com/TencentAILabHealthcare/scBERT). Pre-training weights of CellLM can be found in [cellLM](https://github.com/BioFM/OpenBioMed/tree/main). Pre-training weights of Geneformer can be found in [Geneformer](https://huggingface.co/ctheodoris/Geneformer). Pre-training weights of SCimilarity can be found in [SCimilarity](https://github.com/Genentech/scimilarity).
+
+scFoundation relies on the APIs for access, please refer [scFoundation](https://github.com/biomap-research/scFoundation) for details.
 
 # Benchmarking information
 
