@@ -57,7 +57,7 @@ os.environ["WANDB_MODE"] = "offline"
 
 # Results
 
-We have an official website as the summary of our work. Please use this link for access (We will update this link soon, stay tuned!).
+We have an official website as the summary of our work. Please use this [link](https://sites.google.com/yale.edu/sceval) for access. 
 
 # Contact
 
