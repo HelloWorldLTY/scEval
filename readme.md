@@ -49,6 +49,8 @@ To run the codes in different tasks, please use (we choose batch effect correcti
 python sceval_batcheffect.py
 ```
 
+We offer demo datasets for batch effect correction and cell type annotation. Such datasets can be found [here](https://drive.google.com/drive/folders/1YvBQ44H_jzhS8B35mPjpCMwQserLLhZs?usp=sharing).
+
 To avoid using wandb, please set:
 
 ```
