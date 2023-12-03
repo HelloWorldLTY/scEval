@@ -1,6 +1,6 @@
 # scEval😈: A evaluation platform for single-cell Large Language Models (LLMs)
 
-This is the repo for our benchmarking and analysis project. 
+This is the repo for our benchmarking and analysis project. All methods are collected until Dec 1st, 2023. 
 
 # Install
 
@@ -11,7 +11,13 @@ conda env create -n scgpt --file scgpt_bench.yml
 
 For other methods we used, please refer their original project website for instruction. We recommend creating different environment for different methods.
 
-These methods include: [tGPT](https://github.com/deeplearningplus/tGPT), [Geneformer](https://huggingface.co/ctheodoris/Geneformer), [scBERT](https://github.com/TencentAILabHealthcare/scBERT), [CellLM](https://github.com/BioFM/OpenBioMed/tree/main), [SCimilarity](https://github.com/Genentech/scimilarity), [scFoundation](https://github.com/biomap-research/scFoundation), [TOSICA](https://github.com/JackieHanLab/TOSICA/tree/main), [ResPAN](https://github.com/AprilYuge/ResPAN/tree/main), [scDesign3](https://github.com/SONGDONGYUAN1994/scDesign3), [scVI](https://scvi-tools.org/), [Tangram](https://github.com/broadinstitute/Tangram), [GEARS](https://github.com/snap-stanford/GEARS).
+These methods include: [tGPT](https://github.com/deeplearningplus/tGPT), [Geneformer](https://huggingface.co/ctheodoris/Geneformer), [scBERT](https://github.com/TencentAILabHealthcare/scBERT), [CellLM](https://github.com/BioFM/OpenBioMed/tree/main), [SCimilarity](https://github.com/Genentech/scimilarity), [scFoundation](https://github.com/biomap-research/scFoundation), [CellPLM](https://github.com/OmicsML/CellPLM), [UCE](https://github.com/snap-stanford/UCE).
+
+And
+
+[TOSICA](https://github.com/JackieHanLab/TOSICA/tree/main), [scJoint](https://github.com/SydneyBioX/scJoint), [GLUE](https://github.com/gao-lab/GLUE), [ResPAN](https://github.com/AprilYuge/ResPAN/tree/main), [Harmony](https://scanpy.readthedocs.io/en/stable/generated/scanpy.external.pp.harmony_integrate.html), [scDesign3](https://github.com/SONGDONGYUAN1994/scDesign3), [Splatter](https://github.com/Oshlack/splatter), [scVI](https://scvi-tools.org/), [Tangram](https://github.com/broadinstitute/Tangram), [GEARS](https://github.com/snap-stanford/GEARS).
+
+We will finialzie our evaluation soon.
 
 We need scIB for evaluation. Please use pip to install it:
 ```
