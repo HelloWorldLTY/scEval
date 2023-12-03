@@ -4,7 +4,7 @@ This is the repo for our benchmarking and analysis project. All methods are coll
 
 # Install
 
-To install our benchmarking environment, please use conda to create a environment based on this yml file in your own machine:
+To install our benchmarking environment based on [scGPT](https://scgpt.readthedocs.io/en/latest/), please use conda to create a environment based on this yml file in your own machine:
 ```
 conda env create -n scgpt --file scgpt_bench.yml
 ```
@@ -17,7 +17,7 @@ And
 
 [TOSICA](https://github.com/JackieHanLab/TOSICA/tree/main), [scJoint](https://github.com/SydneyBioX/scJoint), [GLUE](https://github.com/gao-lab/GLUE), [ResPAN](https://github.com/AprilYuge/ResPAN/tree/main), [Harmony](https://scanpy.readthedocs.io/en/stable/generated/scanpy.external.pp.harmony_integrate.html), [scDesign3](https://github.com/SONGDONGYUAN1994/scDesign3), [Splatter](https://github.com/Oshlack/splatter), [scVI](https://scvi-tools.org/), [Tangram](https://github.com/broadinstitute/Tangram), [GEARS](https://github.com/snap-stanford/GEARS).
 
-We will finialzie our evaluation soon.
+We will finalize our evaluation soon.
 
 We need scIB for evaluation. Please use pip to install it:
 ```
