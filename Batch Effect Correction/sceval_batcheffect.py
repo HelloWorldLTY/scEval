@@ -41,6 +41,8 @@ from torchtext._torchtext import (
 )
 from scgpt.tokenizer.gene_tokenizer import GeneVocab
 
+from Sophia import SophiaG 
+from lion_pytorch import Lion
 import argparse
 
 def parse_args():
@@ -477,7 +479,25 @@ if __name__ == "__main__":
     criterion_dab = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(
         model.parameters(), lr=config.lr, eps=1e-4 if config.amp else 1e-8
-    )
+    ) # Adam
+
+    # optimizer = torch.optim.AdamW(
+    #     model.parameters(), lr=config.lr, eps=1e-4 if config.amp else 1e-8
+    # ) # AdamW
+
+    # optimizer = torch.optim.SGD(
+    #     model.parameters(), lr=config.lr
+    # ) # SGD
+
+    optimizer = SophiaG(model.parameters(), lr=config.lr, betas=(0.965, 0.99), rho = 0.01, weight_decay=1e-1) # Sophia-G
+
+
+    optimizer = Lion(
+        model.parameters(), lr=config.lr,weight_decay=1e-2
+    ) # Lion
+
+
+
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, 1, gamma=config.schedule_ratio)
 
     scaler = torch.cuda.amp.GradScaler(enabled=config.amp)
