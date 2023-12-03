@@ -40,7 +40,7 @@ from torchtext._torchtext import (
     Vocab as VocabPybind,
 )
 from scgpt.tokenizer.gene_tokenizer import GeneVocab
-
+from sklearn.metrics import accuracy_score, f1_score, confusion_matrix, precision_recall_fscore_support, classification_report
 import argparse
 
 def parse_args():
@@ -837,7 +837,6 @@ if __name__ == "__main__":
             
         return cell_embeddings
 
-    ### %%time
     best_val_loss = float("inf")
     best_avg_bio = 0.0
     best_model = None

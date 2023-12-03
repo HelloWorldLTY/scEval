@@ -48,32 +48,6 @@ sc.set_figure_params(figsize=(4, 4))
 os.environ["KMP_WARNINGS"] = "off"
 # os.environ["WANDB_MODE"] = "offline"
 
-# hyperparameter_defaults = dict(
-#     seed=42,
-#     dataset_name="PBMC_10K",
-#     do_train=True,
-#     load_model="save/scGPT_bc",
-#     mask_ratio=0.1,
-#     epochs=10,
-#     n_bins=10001,
-#     GEPC=True,  # Masked value prediction for cell embedding
-#     ecs_thres=0.8,  # Elastic cell similarity objective, 0.0 to 1.0, 0.0 to disable
-#     dab_weight=10.0,
-#     lr=1e-4,
-#     batch_size=64,
-#     layer_size=128,
-#     nlayers=4,
-#     nhead=4,
-#     # if load model, batch_size, layer_size, nlayers, nhead will be ignored
-#     dropout=0.2,
-#     schedule_ratio=0.9,  # ratio of epochs for learning rate schedule
-#     save_eval_interval=5,
-#     log_interval=10,
-#     fast_transformer=True,
-#     pre_norm=False,
-#     amp=True,  # Automatic Mixed Precision
-# )
-
 # modify original param
 hyperparameter_defaults = dict(
     seed=42,
@@ -114,7 +88,6 @@ print(config)
 
 set_seed(config.seed)
 
-# %%
 # settings for input and preprocessing
 pad_token = "<pad>"
 special_tokens = [pad_token, "<cls>", "<eoc>"]
@@ -129,7 +102,6 @@ per_seq_batch_sample = False
 DSBN = True  # Domain-spec batchnorm
 explicit_zero_prob = True  # whether explicit bernoulli for zeros
 
-# %%
 dataset_name = config.dataset_name
 save_dir = Path(f"./save/dev_{dataset_name}-{time.strftime('%b%d-%H-%M')}/")
 save_dir.mkdir(parents=True, exist_ok=True)
@@ -141,7 +113,6 @@ logger = scg.logger
 scg.utils.add_file_handler(logger, save_dir / "run.log")
 
 
-# %% [markdown]
 # ## Loading and preparing data
 # if dataset_name == "PBMC_10K":
 #     adata = scvi.data.pbmc_dataset()  # 11990 × 3346
@@ -161,7 +132,7 @@ data_is_raw = True
 
 # adata = adata[[True if i in ["Batch3_fluidigmc1", "Batch5_smartseq2"] else False for i in adata.obs.batch]]
 
-# %%
+
 # make the batch category column
 adata.obs["str_batch"] = adata.obs[ori_batch_col].astype(str)
 batch_id_labels = adata.obs["str_batch"].astype("category").cat.codes.values
@@ -219,15 +190,12 @@ preprocessor = Preprocessor(
 )
 preprocessor(adata, batch_key="batch" if dataset_name != "heart_cell" else None)
 
-# %%
 if per_seq_batch_sample:
     # sort the adata by batch_id in advance
     adata_sorted = adata[adata.obs["batch_id"].argsort()].copy()
 
-# %% [markdown]
 # ## Tokenize input
 
-# %%
 input_layer_key = "X_binned"
 all_counts = (
     adata.layers[input_layer_key].A
@@ -255,7 +223,6 @@ batch_ids = np.array(batch_ids)
     all_counts, celltypes_labels, batch_ids, test_size=0.001, shuffle=True
 )
 
-# %%
 if config.load_model is None:
     vocab = Vocab(
         VocabPybind(genes + special_tokens, None)
@@ -263,7 +230,6 @@ if config.load_model is None:
 vocab.set_default_index(vocab["<pad>"])
 gene_ids = np.array(vocab(genes), dtype=int)
 
-# %%
 tokenized_train = tokenize_and_pad_batch(
     train_data,
     gene_ids,
@@ -294,7 +260,7 @@ logger.info(
 )
 
 
-# %%
+
 def prepare_data(sort_seq_batch=False) -> Tuple[Dict[str, torch.Tensor]]:
     masked_values_train = random_mask_value(
         tokenized_train["values"],
@@ -409,10 +375,9 @@ def prepare_dataloader(
     )
     return data_loader
 
-# %% [markdown]
+
 # # Create and finetune scGPT
 
-# %%
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 ntokens = len(vocab)  # size of vocabulary

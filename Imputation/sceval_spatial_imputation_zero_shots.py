@@ -126,7 +126,7 @@ adata.var_names = [i.upper() for i in adata.var_names]
 data_is_raw = True
 
 
-# %%
+
 # make the batch category column 
 adata.obs["str_batch"] = adata.obs[ori_batch_col].astype(str)
 batch_id_labels = adata.obs["str_batch"].astype("category").cat.codes.values
@@ -183,15 +183,14 @@ preprocessor = Preprocessor(
 )
 preprocessor(adata, batch_key="batch" if dataset_name != "heart_cell" else None)
 
-# %%
+
 if per_seq_batch_sample:
     # sort the adata by batch_id in advance
     adata_sorted = adata[adata.obs["batch_id"].argsort()].copy()
 
-# %% [markdown]
 # ## Tokenize input
 
-# %%
+
 input_layer_key = "X_binned"
 all_counts = (
     adata.layers[input_layer_key].A
@@ -222,7 +221,7 @@ per_seq_batch_sample = False
 DSBN = True  # Domain-spec batchnorm
 explicit_zero_prob = True  # whether explicit bernoulli for zeros
 
-# %%
+
 dataset_name = config.dataset_name
 save_dir = Path(f"./save/dev_{dataset_name}-{time.strftime('%b%d-%H-%M')}/")
 save_dir.mkdir(parents=True, exist_ok=True)
@@ -260,13 +259,6 @@ batch_ids = np.array(batch_ids)
     all_counts, celltypes_labels, batch_ids, test_size=0.001, shuffle=True
 )
 
-# %%
-if config.load_model is None:
-    vocab = Vocab(
-        VocabPybind(genes + special_tokens, None)
-    )  # bidirectional lookup [gene <-> int]
-vocab.set_default_index(vocab["<pad>"])
-gene_ids = np.array(vocab(genes), dtype=int)
 
 if config.load_model is None:
     vocab = Vocab(
@@ -275,7 +267,14 @@ if config.load_model is None:
 vocab.set_default_index(vocab["<pad>"])
 gene_ids = np.array(vocab(genes), dtype=int)
 
-# %%
+if config.load_model is None:
+    vocab = Vocab(
+        VocabPybind(genes + special_tokens, None)
+    )  # bidirectional lookup [gene <-> int]
+vocab.set_default_index(vocab["<pad>"])
+gene_ids = np.array(vocab(genes), dtype=int)
+
+
 tokenized_train = tokenize_and_pad_batch(
     train_data,
     gene_ids,
@@ -306,7 +305,7 @@ logger.info(
 )
 
 
-# %%
+
 def prepare_data(sort_seq_batch=False) -> Tuple[Dict[str, torch.Tensor]]:
     masked_values_train = random_mask_value(
         tokenized_train["values"],
@@ -421,10 +420,9 @@ def prepare_dataloader(
     )
     return data_loader
 
-# %% [markdown]
 # # Create and finetune scGPT
 
-# %%
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 ntokens = len(vocab)  # size of vocabulary
