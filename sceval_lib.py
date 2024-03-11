@@ -7,6 +7,7 @@ import scanpy as sc
 import scipy
 from scgpt.utils import set_seed
 from sklearn.metrics import classification_report
+import scipy.stats
 
 
 set_seed(0)
@@ -30,10 +31,10 @@ def eval_scib_metrics(
         pcr_=True,
         isolated_labels_f1_=False,
         trajectory_=False,
-        nmi_=True,  # use the clustering, bias to the best matching
-        ari_=True,  # use the clustering, bias to the best matching
+        nmi_=True,  
+        ari_=True, 
         cell_cycle_=False,
-        kBET_=False,  # kBET return nan sometimes, need to examine
+        kBET_=True,  
         ilisi_=False,
         clisi_=False,
     )
@@ -75,10 +76,10 @@ def eval_scib_metrics_onlybio(
         pcr_=True,
         isolated_labels_f1_=False,
         trajectory_=False,
-        nmi_=True,  # use the clustering, bias to the best matching
-        ari_=True,  # use the clustering, bias to the best matching
+        nmi_=True,  
+        ari_=True,  
         cell_cycle_=False,
-        kBET_=False,  # kBET return nan sometimes, need to examine
+        kBET_=False,  
         ilisi_=False,
         clisi_=False,
     )
@@ -103,10 +104,8 @@ def calculate_correlation_metric(y1, y2):
     y1 = y1.float()
     y2 = y2.float()
     for id1, id2 in zip(y1, y2):
-        id1_mean = id1 - id1.mean()
-        id2_mean = id2 - id2.mean() 
         
-        cor_cal = torch.dot(id1_mean, id2_mean) / (torch.norm(id1_mean)*torch.norm(id2_mean))
+        cor_cal,_ = scipy.stats.pearsonr(id1,id2)
         cor += cor_cal.item()
     return cor
 
@@ -127,9 +126,15 @@ class scEval(object):
         results = classification_report(pred_label, true_label, digits=4)
         return results
     
-    def evaluation_perturb_pred(self, pred_model, true_result):
-        cor_total = calculate_correlation_metric(pred_model, true_result)
-        return {"correlation":cor_total / len(pred_model)}
+    def evaluation_perturb_pred(self, pred_model, true_result): #assume the outputs are both in AnnData format. Rows are cells while columns are genes.
+        cor_total = calculate_correlation_metric(pred_model.X.T, true_result.X.T)
+        return {"correlation":cor_total / len(pred_model.X.T)}
+    
+    def evaluation_perturb_pred_gearsofficial(self, gears_model, pred_model ):
+        from gears.inference import evaluate, compute_metrics, deeper_analysis, non_dropout_analysis
+        test_res = evaluate(gears_model.dataloader['test_loader'], pred_model)
+        test_metrics, test_pert_res = compute_metrics(test_res)
+        return test_metrics
     
     def evaluation_imputation_scrna(self, batch_key = 'batch',label_key = 'celltype', emb_name = 'X_scGPT'):
         results = eval_scib_metrics_onlybio(self.adata,batch_key,label_key, emb_name)

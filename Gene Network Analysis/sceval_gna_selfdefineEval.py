@@ -4,27 +4,26 @@ import numpy as np
 import pandas as pd
 from grn import GeneEmbedding
 import seaborn as sns
-
+import gseapy as gp
 adata = sc.read_h5ad("pbmc_tissue_gene_embeddings.h5ad")
 
-#marker genes by COSG
-mkr_set = {'Erythrocytes': ['KRT1', 'TMCC2', 'ARG1'],
- 'Erythroid progenitors': ['GPT', 'SLC10A4', 'CCNE1'],
- 'CD10+ B cells': ['AKAP12', 'CYGB', 'MME'],
- 'Megakaryocyte progenitors': ['LY6G6F', 'PF4V1', 'CMTM5'],
- 'HSPCs': ['CRHBP', 'ROBO4', 'NPR3'],
- 'Monocyte progenitors': ['MS4A3', 'CTSG', 'AZU1'],
- 'Plasmacytoid dendritic cells': ['KRT5', 'ASIP', 'EPHB1'],
- 'CD20+ B cells': ['MS4A1', 'FCRL1', 'COL19A1'],
- 'Plasma cells': ['CAV1', 'JSRP1', 'SPAG4'],
- 'Monocyte-derived dendritic cells': ['ZNF366', 'CD1E', 'PKIB'],
- 'CD14+ Monocytes': ['CYP1B1', 'NRG1', 'CYP27A1'],
- 'CD16+ Monocytes': ['CDKN1C', 'HES4', 'LYPD2'],
- 'CD4+ T cells': ['TSHZ2', 'CD40LG', 'TRAT1'],
- 'CD8+ T cells': ['CD8B', 'S100B', 'NELL2'],
- 'NK cells': ['KLRF1', 'KLRC1', 'NCAM1'],
- 'NKT cells': ['SLC4A10', 'GZMK', 'LAG3']}
-
+#marker genes defined by the original paper filtered based on expression profiles.
+mkr_set = {'Erythrocytes': ['CST3'],
+ 'Erythroid progenitors': ['GATA2'],
+ 'CD10+ B cells': ['MME'],
+ 'Megakaryocyte progenitors': ['PF4',	'ITGA2B',	'PPBP'],
+ 'HSPCs': ['CD34',	'PROCR'],
+ 'Monocyte progenitors': ['IRF8',	'CSF1R',	'LY86'],
+ 'Plasmacytoid dendritic cells': ['GZMB',	'IL3RA'],
+ 'CD20+ B cells': ['MS4A1'],
+ 'Plasma cells': [],
+ 'Monocyte-derived dendritic cells': ['CD1C','FCER1A'],
+ 'CD14+ Monocytes': ['CD14'],
+ 'CD16+ Monocytes': ['FCGR3A'],
+ 'CD4+ T cells': ['CD4'],
+ 'CD8+ T cells': ['CD8B', 'CD8A'],
+ 'NK cells': ['NKG7','GNLY'],
+          }
 
 makerlist = []
 
@@ -47,6 +46,7 @@ mole_list = pd.read_table("Participating Molecules [R-HSA-168256].tsv")
 
 mole_list_dnarna = mole_list[ mole_list["MoleculeType"]  == 'DNA/RNA' ]
 
+adata_new = adata
 cofunction_gene = []
 for i in mole_list_dnarna["MoleculeName"].values:
     gene = i.split(' ')[1]
@@ -55,9 +55,32 @@ for i in mole_list_dnarna["MoleculeName"].values:
 adata_HLA = adata_new[[True if ('HLA' in i )  else False for i in adata_new.obs['gene_name'].values]]
 adata_CD = adata_new[[True if ('CD' in i) else False for i in adata_new.obs['gene_name'].values]]
 
-intset_result = set(adata_HLA.obs['gene_name']).intersection(set(cofunction_gene))
-print(len(intset_result) / len(adata_HLA))
+CD_genes = adata_new.obs['gene_name'].values
 
-intset_result = set(adata_CD.obs['gene_name']).intersection(set(cofunction_gene))
-print(len(intset_result) / len(adata_CD))
+# Meta info about the number of terms (tests) in the databases
+df_database = pd.DataFrame(
+data = [['GO_Biological_Process_2021', 6036],
+['GO_Molecular_Function_2021', 1274],
+['Reactome_2022', 1818]],
+columns = ['dataset', 'term'])
+
+# Select desired database for query; here use Reactome as an example
+databases = ['Reactome_2022']
+m = df_database[df_database['dataset'].isin(databases)]['term'].sum()
+# p-value correction for total number of tests done
+p_thresh = 0.05/m
+
+# Perform pathway enrichment analysis using the gseapy package in the Reactome database
+df = pd.DataFrame()
+enr_Reactome = gp.enrichr(gene_list=CD_genes,
+                          gene_sets=databases,
+                          organism='Human',
+                          outdir='test/enr_Reactome',
+                          cutoff=0.5)
+out = enr_Reactome.results
+out = out[out['P-value'] < p_thresh]
+df = df.append(out, ignore_index=True)
+df
+
+
 
