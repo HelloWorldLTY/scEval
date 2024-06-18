@@ -1,15 +1,15 @@
-# scEval😈: A evaluation platform for single-cell Foundation Models (FMs)
+# scEval😈: An evaluation platform for single-cell Foundation Models (FMs)
 
 This is the repo for our benchmarking and analysis project. All methods are collected until March 1st, 2024. 
 
 # Install
 
-To install our benchmarking environment based on [scGPT](https://scgpt.readthedocs.io/en/latest/), please use conda to create a environment based on this yml file in your own machine:
+To install our benchmarking environment based on [scGPT](https://scgpt.readthedocs.io/en/latest/), please use conda to create an environment based on this yml file in your own machine:
 ```
 conda env create -n scgpt --file scgpt_bench.yml
 ```
 
-For other methods we used, please refer their original project website for instruction. We recommend creating different environment for different methods. Considering about the difficulities of installing different scFMs, we provide a list of yml files we used to install these models in the fodler **installation_baselines**.
+For other methods we used, please refer to their original project website for instructions. We recommend creating different environments for different methods. Considering the difficulties of installing different scFMs, we provide a list of yml files we used to install these models in the folder **installation_baselines**.
 
 These methods include: 
 
@@ -24,9 +24,9 @@ We need scIB for evaluation. Please use pip to install it:
 ```
 pip install scib
 ```
-We also provide a scib version with our new function in this repo. Please make sure you have **scib >=1.0.4** to run kBET correclty.
+We also provide a scib version with our new function in this repo. Please make sure you have **scib >=1.0.4** to run kBET correctly.
 
-We will release a version of sceval with more functions in the future!
+We will release a version of scEval with more functions in the future!
 
 
 # Pre-training weights
@@ -39,7 +39,7 @@ scFoundation relies on the APIs for access, please refer [scFoundation](https://
 
 # Benchmarking information
 
-Please refer different folders for the codes of scEval and metrics we used to evaluate single-cell LLMs under different tasks. In general, we list the tasks and corresponding metrics here:
+Please refer to different folders for the codes of scEval and metrics we used to evaluate single-cell LLMs under different tasks. In general, we list the tasks and corresponding metrics here:
 
 | Tasks                                                 | Metrics                                  |
 |-------------------------------------------------------|------------------------------------------|
