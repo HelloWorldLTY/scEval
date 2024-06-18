@@ -1,14 +1,13 @@
-from typing import List, Tuple, Dict, Union, Optional
-import AnnData
 import torch
 import numpy as np
 import scib
 import scanpy as sc
 import scipy
-from scgpt.utils import set_seed
-from sklearn.metrics import classification_report
 import scipy.stats
-
+from scgpt.utils import set_seed
+from anndata import AnnData
+from sklearn.metrics import classification_report
+from typing import List, Tuple, Dict, Union, Optional
 
 set_seed(0)
 def eval_scib_metrics(
@@ -60,6 +59,7 @@ def eval_scib_metrics_onlybio(
     adata: AnnData,
     batch_key: str = "batch",
     label_key: str = "celltype",
+    
     emb_name: str = "X_scGPT",
     notes: Optional[str] = None,
 ) -> Dict:
@@ -123,7 +123,7 @@ class scEval(object):
     
 
     def evaluation_cta_gfp(self, pred_label, true_label):
-        results = classification_report(pred_label, true_label, digits=4)
+        results = classification_report(true_label, pred_label, digits=4)
         return results
     
     def evaluation_perturb_pred(self, pred_model, true_result): #assume the outputs are both in AnnData format. Rows are cells while columns are genes.

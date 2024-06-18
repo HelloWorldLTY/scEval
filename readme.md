@@ -9,7 +9,7 @@ To install our benchmarking environment based on [scGPT](https://scgpt.readthedo
 conda env create -n scgpt --file scgpt_bench.yml
 ```
 
-For other methods we used, please refer their original project website for instruction. We recommend creating different environment for different methods.
+For other methods we used, please refer their original project website for instruction. We recommend creating different environment for different methods. Considering about the difficulities of installing different scFMs, we provide a list of yml files we used to install these models in the fodler **installation_baselines**.
 
 These methods include: 
 
