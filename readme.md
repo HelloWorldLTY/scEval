@@ -13,7 +13,7 @@ For other methods we used, please refer to their original project website for in
 
 These methods include: 
 
-[tGPT](https://github.com/deeplearningplus/tGPT), [Geneformer](https://huggingface.co/ctheodoris/Geneformer), [scBERT](https://github.com/TencentAILabHealthcare/scBERT), [CellLM](https://github.com/BioFM/OpenBioMed/tree/main), [SCimilarity](https://github.com/Genentech/scimilarity), [scFoundation](https://github.com/biomap-research/scFoundation), [CellPLM](https://github.com/OmicsML/CellPLM), [UCE](https://github.com/snap-stanford/UCE). These are also single-cell FMs.
+[tGPT](https://github.com/deeplearningplus/tGPT), [Geneformer](https://huggingface.co/ctheodoris/Geneformer), [scBERT](https://github.com/TencentAILabHealthcare/scBERT), [CellLM](https://github.com/BioFM/OpenBioMed/tree/main), [SCimilarity](https://github.com/Genentech/scimilarity), [scFoundation](https://github.com/biomap-research/scFoundation), [CellPLM](https://github.com/OmicsML/CellPLM), [UCE](https://github.com/snap-stanford/UCE), [GeneCompass](https://github.com/xCompass-AI/GeneCompass/tree/main). These are also single-cell FMs.
 
 And
 
@@ -31,11 +31,9 @@ We will release a version of scEval with more functions in the future!
 
 # Pre-training weights
 
-Most of our experiments were finished based on weights under [scGPT_bc](https://drive.google.com/drive/folders/1S9B2QUvBAh_FxUNrWrLfsvsds1thF9ad?usp=share_link). [scGPT_full](https://drive.google.com/drive/folders/1eNdHu45uXDHOF4u0J1sYiBLZYN55yytS?usp=share_link) from scGPT v2 was also used in the batch effect correction evaluation.
+Most of our experiments were finished based on weights under [scGPT_bc](https://drive.google.com/drive/folders/1S9B2QUvBAh_FxUNrWrLfsvsds1thF9ad?usp=share_link). [scGPT_full](https://drive.google.com/drive/folders/1eNdHu45uXDHOF4u0J1sYiBLZYN55yytS?usp=share_link) from scGPT v2 was also used in the batch effect correction evaluation. Pre-training weights of scBERT can be found in [scBERT](https://github.com/TencentAILabHealthcare/scBERT). Pre-training weights of CellLM can be found in [cellLM](https://github.com/BioFM/OpenBioMed/tree/main). Pre-training weights of Geneformer can be found in [Geneformer](https://huggingface.co/ctheodoris/Geneformer). Pre-training weights of SCimilarity can be found in [SCimilarity](https://github.com/Genentech/scimilarity). Pre-training weights of UCE can be found in [UCE](https://github.com/snap-stanford/UCE). Pre-training weights of tGPT can be found in [tGPT](https://github.com/deeplearningplus/tGPT). Pre-training weights of CellPLM can be found in [CellPLM](https://github.com/OmicsML/CellPLM). 
 
-Pre-training weights of scBERT can be found in [scBERT](https://github.com/TencentAILabHealthcare/scBERT). Pre-training weights of CellLM can be found in [cellLM](https://github.com/BioFM/OpenBioMed/tree/main). Pre-training weights of Geneformer can be found in [Geneformer](https://huggingface.co/ctheodoris/Geneformer). Pre-training weights of SCimilarity can be found in [SCimilarity](https://github.com/Genentech/scimilarity).
-
-scFoundation relies on the APIs for access, please refer [scFoundation](https://github.com/biomap-research/scFoundation) for details.
+scFoundation relies on the APIs or local sever for access, please refer [scFoundation](https://github.com/biomap-research/scFoundation) for details. Details of GeneCompas can be found in [GeneCompass](https://github.com/xCompass-AI/GeneCompass/tree/main)
 
 # Benchmarking information
 
@@ -52,7 +50,7 @@ Please refer to different folders for the codes of scEval and metrics we used to
 
 The file 'sceval_lib.py' includes all of the metrics we used in this project.
 
-To run the codes in different tasks, please use (we choose batch effect correction as an example here):
+To run the codes in different tasks, please use (we choose batch effect correction of scGPT as an example here):
 
 ```
 python sceval_batcheffect.py
@@ -64,7 +62,14 @@ To avoid using wandb, please set:
 
 ```
 os.environ["WANDB_MODE"] = "offline"
+
 ```
+
+We will upload our codes for benchmarking different foundation models soon.
+
+# Devices
+
+We recommend using sever to run benchmarked methods and scEval platform. To run single-cell Foundation Models, GPU cores (A100 or higher version) and 40+ GB memory are required. To run scEval, 40+ GB memory is recommended.
 
 # Results
 
