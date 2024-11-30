@@ -63,6 +63,8 @@ To run the codes in different tasks, please use (we choose batch effect correcti
 python sceval_batcheffect.py
 ```
 
+We recommend directly evaluating the methods based on their outputs (as .h5ad file), which can be easily performed based on the codes in **sceval_method.py**.
+
 We offer demo datasets for batch effect correction and cell type annotation. Such datasets can be found [here](https://drive.google.com/drive/folders/1YvBQ44H_jzhS8B35mPjpCMwQserLLhZs?usp=sharing).
 
 To avoid using wandb, please set:
@@ -76,7 +78,7 @@ We will upload our codes for benchmarking different foundation models soon.
 
 # Devices
 
-We recommend using sever to run benchmarked methods and scEval platform. To run single-cell Foundation Models, GPU cores (A100 or higher version) and 40+ GB memory are required. To run scEval, 40+ GB memory is recommended.
+We recommend using sever to run benchmarked methods and scEval platform. To run single-cell Foundation Models, GPU cores (A100 or higher version) and 40+ GB memory are required. To run scEval (only the evaluation), 40+ GB memory is recommended.
 
 # Results
 

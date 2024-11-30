@@ -1,0 +1,2 @@
+# GEARS
+python get_embedding.py --task_name GEARS_demo_batch --input_type singlecell --output_type gene_batch --pool_type all --tgthighres f1 --data_path ./examples/GEARS/pre_in.npy --save_path ./examples/GEARS/ --pre_normalized A
