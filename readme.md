@@ -1,6 +1,8 @@
 # scEval😈: An evaluation platform for single-cell Foundation Models (FMs)
 
-This is the repo for our benchmarking and analysis project. All methods are collected until March 1st, 2024. 
+This is the repo for our benchmarking and analysis project. All methods are collected until Dec 1st, 2024. 
+
+News: We are collaborating with [OpenProblems](https://openproblems.bio/) to make this benchmark alive! Stay tuned and we will update the benchmarking results soon!
 
 # Install
 
@@ -52,7 +54,7 @@ Please refer to different folders for the codes of scEval and metrics we used to
 | and Simulation                                        | [scIB](https://github.com/theislab/scib)                                     |
 | Cell-type Annotation and Gene Function Prediction     | Accuracy, Precision, Recall and F1 score |
 | Imputation                                            | [scIB](https://github.com/theislab/scib), Correlation                        |
-| Perturbation Prediction                               | Correlation                              |
+| Perturbation Prediction                               | Correlation, Mean Squared Error                              |
 | Gene Network Analysis                                 | Jaccard similarity                       |
 
 The file 'sceval_lib.py' includes all of the metrics we used in this project.
@@ -65,7 +67,7 @@ python sceval_batcheffect.py
 
 We recommend directly evaluating the methods based on their outputs (as .h5ad file), which can be easily performed based on the codes in **sceval_method.py**.
 
-We offer demo datasets for batch effect correction and cell type annotation. Such datasets can be found [here](https://drive.google.com/drive/folders/1YvBQ44H_jzhS8B35mPjpCMwQserLLhZs?usp=sharing).
+We offer demo datasets for batch effect correction and cell type annotation. Such datasets can be found [here](https://yaleedu-my.sharepoint.com/:f:/g/personal/tianyu_liu_yale_edu/Eiqs78qeqwBNiy6zoI_JDnABfz7e2w4Gpj0F4t4l5S-oCw?e=0xSnew).
 
 To avoid using wandb, please set:
 
