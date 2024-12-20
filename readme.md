@@ -18,7 +18,19 @@ conda activate scgpt
 conda env update --file scgpt_bench.yml
 ```
 
-For other methods we used, please refer to their original project website for instructions. We recommend creating different environments for different methods. Considering the difficulties of installing different scFMs, we provide a list of yml files we used to install these models in the folder **installation_baselines**.
+We also provide docker installation, please use (need gpu):
+
+```
+docker build -t my-conda-image .
+```
+
+To activate it, please use:
+
+```
+docker run -it --rm my-conda-image
+```
+
+For other methods we used, please refer to their original project website for instructions. We recommend  creating different environments for different methods. Considering the difficulties of installing different scFMs, we provide a list of yml files we used to install these models in the folder **installation_baselines**.
 
 These methods include: 
 
