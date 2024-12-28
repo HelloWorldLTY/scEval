@@ -846,7 +846,9 @@ def simulation_data(
                     MVC=config.GEPC,
                     ECS=config.ecs_thres > 0,
                 )
-                mlm_out.append(output_dict["mlm_output"].cpu().detach().numpy()[0] * ((output_dict["mlm_zero_probs"]>0.5)*1).cpu().detach().numpy()[0])
+                
+               mlm_out.append(output_dict["mlm_output"].cpu().detach().numpy()[0] * 
+               ((output_dict["mlm_zero_probs"]>0.5)*1).cpu().detach().numpy()[0])
     
     return mlm_out
         

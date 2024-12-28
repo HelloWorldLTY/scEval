@@ -30,7 +30,7 @@ To activate it, please use:
 docker run -it --rm my-conda-image
 ```
 
-For other methods we used, please refer to their original project website for instructions. We recommend  creating different environments for different methods. Considering the difficulties of installing different scFMs, we provide a list of yml files we used to install these models in the folder **installation_baselines**.
+For other methods we used, please refer to their original project website for instructions. We recommend  creating different environments for different methods. Considering the difficulties of installing different scFMs, we provide a list of yml files and an example of Dockerfile we used to install these models in the folder **installation_baselines**.
 
 These methods include: 
 
