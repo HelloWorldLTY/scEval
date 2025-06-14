@@ -27,19 +27,18 @@ query_data = sc.read_h5ad("/gpfs/gibbs/pi/zhao/tl688/scGPT/examples/mouse_spatia
 
 ref_data.var_names = symbol_to_ensembl(ref_data.var_names )
 query_data.var_names = symbol_to_ensembl(query_data.var_names )
+true_list = set(query_data)
 
 ref_data.var_names_make_unique()
 query_data.var_names_make_unique()
 
-ref_data.obs['batch'] = ref_data.obs_names
-query_data.obs['batch'] = query_data.obs_names
+ref_data.obs['batch'] = '0'
+query_data.obs['batch'] = '1'
 
-query_data.var_names
+train_data = query_data.concatenate(ref_data, join='outer', batch_key=None, index_unique=None)
+query_data = train_data[train_data.obs['batch'] == '1']
 
-# ref_data.var_names = [i.upper() for i in ref_data.var_names]
-# query_data.var_names = [i.upper() for i in query_data.var_names]
-# target_genes = query_data.var_names
-target_genes = ['ENSG00000206579']
+target_genes = sorted(set(query_data.var_names) - true_list)
 query_data.obsm['truth'] = query_data[:, target_genes].X.toarray()
 query_data[:, target_genes].X = 0
 train_data = query_data.concatenate(ref_data, join='outer', batch_key=None, index_unique=None)
@@ -48,51 +47,20 @@ train_data.obs['split'] = 'train'
 train_data.obs['split'][train_data.obs['batch']==query_data.obs['batch'][-1]] = 'valid'
 train_data.obs['split'][train_data.obs['batch']==ref_data.obs['batch'][-1]] = 'valid'
 
-
-query_data.obs['platform'] = 'merfish'
-
-query_data.obsm['spatial'][:,0]
-
-query_data.obs['x_FOV_px'] = query_data.obsm['spatial'][:,0]
-query_data.obs['y_FOV_px'] = query_data.obsm['spatial'][:,1]
-
-query_data.var.index
-
-ref_data.var.index
-
-query_var_new = []
-for i in query_data.var.index:
-    if "ENSG" in i:
-        query_var_new.append(i)
-ref_var_new = []
-for i in ref_data.var.index:
-    if "ENSG" in i:
-        ref_var_new.append(i)
-
-query_data = query_data[:,query_var_new]
-ref_data = ref_data[:,ref_var_new]
-## Specify gene to impute
-
-query_genes = [g for g in query_data.var.index if g not in ['MRPL15']]
+query_genes = [g for g in query_data.var.index if g not in target_genes]
 query_batches = list(query_data.obs['batch'].unique())
 ref_batches = list(ref_data.obs['batch'].unique())
 batch_gene_list = dict(zip(list(query_batches) + list(ref_batches),
     [query_genes]*len(query_batches) + [ref_data.var.index.tolist()]*len(ref_batches)))
 
-## Overwrite parts of the default config
 pipeline_config = ImputationDefaultPipelineConfig.copy()
 model_config = ImputationDefaultModelConfig.copy()
 
-pipeline_config, model_config
-
-## Fine-tuning
 
 pipeline = ImputationPipeline(pretrain_prefix=PRETRAIN_VERSION, # Specify the pretrain checkpoint to load
                                       overwrite_config=model_config,  # This is for overwriting part of the pretrain config
-                                      pretrain_directory='/gpfs/gibbs/pi/zhao/tl688/CellPLM_cta/ckpt/')
-pipeline.model
+                                      pretrain_directory='../ckpt')
 
-# batch_gene_list
 pipeline.fit(train_data, # An AnnData object
             pipeline_config, # The config dictionary we created previously, optional
             split_field = 'split', #  Specify a column in .obs that contains split information
@@ -101,3 +69,19 @@ pipeline.fit(train_data, # An AnnData object
             batch_gene_list = batch_gene_list, # Specify genes that are measured in each batch, see previous section for more details
             device = DEVICE,
             ) 
+
+out = pipeline.predict(
+        query_data, # An AnnData object
+        pipeline_config, # The config dictionary we created previously, optional
+        device = DEVICE,
+    )
+
+pipeline.score(
+                query_data, # An AnnData object
+                evaluation_config = {'target_genes': target_genes}, # The config dictionary we created previously, optional
+                label_fields = ['truth'], # A field in .obsm that stores the ground-truth for evaluation
+                device = DEVICE,
+)  
+
+import torch
+torch.save(out, "imputed_cellplm.pkl")
