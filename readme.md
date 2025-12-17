@@ -2,7 +2,7 @@
 
 This is the repo for our benchmarking and analysis project. All methods are collected until Dec 1st, 2025. 
 
-News: We have implemented CellFM in different tasks and included this model to our benchmark system. Please check related folders for updates. Thank you to everyone for your support of this project!
+News: We have implemented [CellFM](https://github.com/biomed-AI/CellFM-torch) in different tasks and included this model to our benchmark system. Please check related folders for updates. Thank you for your support of this project!
 
 # Install
 
