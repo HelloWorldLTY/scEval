@@ -1,8 +1,8 @@
 # scEval😈: An evaluation platform for single-cell Foundation Models (FMs)
 
-This is the repo for our benchmarking and analysis project. All methods are collected until Dec 1st, 2024. 
+This is the repo for our benchmarking and analysis project. All methods are collected until Dec 1st, 2025. 
 
-News: We are collaborating with [OpenProblems](https://openproblems.bio/) to make this benchmark alive! Stay tuned and we will update the benchmarking results soon!
+News: We have implemented CellFM in different tasks and included this model to our benchmark system. Please check related folders for updates. Thank you to everyone for your support of this project!
 
 # Install
 
