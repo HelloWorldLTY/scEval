@@ -108,9 +108,8 @@ Please contact tianyu.liu@yale.edu if you have any questions about this project.
 @article{liu2023evaluating,
   title={Evaluating the Utilities of Foundation Models in Single-cell Data Analysis},
   author={Liu, Tianyu and Li, Kexing and Wang, Yuge and Li, Hongyu and Zhao, Hongyu},
-  journal={bioRxiv},
-  pages={2023--09},
-  year={2023},
-  publisher={Cold Spring Harbor Laboratory}
+  journal={Advanced Science (in press)},
+  year={2026}
 }
+
 ```
