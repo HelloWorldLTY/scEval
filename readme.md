@@ -105,11 +105,12 @@ Please contact tianyu.liu@yale.edu if you have any questions about this project.
 # Citation
 
 ```
-@article{liu2023evaluating,
-  title={Evaluating the Utilities of Foundation Models in Single-cell Data Analysis},
+@article{liu2024evaluating,
+  title={Evaluating the utilities of foundation models in single-cell data analysis},
   author={Liu, Tianyu and Li, Kexing and Wang, Yuge and Li, Hongyu and Zhao, Hongyu},
-  journal={Advanced Science (in press)},
-  year={2026}
+  journal={Advanced Science},
+  pages={e14490},
+  year={2026},
+  publisher={Wiley Online Library}
 }
-
 ```
